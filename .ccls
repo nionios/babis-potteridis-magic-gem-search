@@ -1,0 +1,10 @@
+g++
+-I./include/base_classes
+-I./include/map
+-I./include/entities
+-I./include/helpers
+-I./include/exceptions
+-I./include/files/save
+-I./include/files/encode
+-I./include/files/interpret
+-I./include/files/load
