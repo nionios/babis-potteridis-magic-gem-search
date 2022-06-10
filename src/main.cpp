@@ -8,12 +8,12 @@
 // My machine specs: Arch Linux, kernel: 5.17.5-arch1-1, g++ (GCC) 11.2.0
 #include <iostream>
 #include <string>
-#include <student.hpp>
-#include <subject.hpp>
-#include <operators.hpp>
-#include <uni_organizer_helpers.hpp>
+#include <time.h>
+#include <all_helpers.hpp>
 
 int
 main (int argc, char **argv)
 {
+    // Seed the random number generator. Needed for randomly spawning jewel
+    srand(time(NULL));
 }

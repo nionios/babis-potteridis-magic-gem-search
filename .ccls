@@ -1,4 +1,4 @@
-g++
+g++ -lncurses
 -I./include/base_classes
 -I./include/map
 -I./include/entities

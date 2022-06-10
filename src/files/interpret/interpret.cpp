@@ -32,6 +32,7 @@ interpret
                 break;
         }
     }
-    Map interpreted_map(interpreted_area);
+    // Construct map object with interpreted data
+    Map interpreted_map(interpreted_area, line, col);
     return interpreted_map;
 }
