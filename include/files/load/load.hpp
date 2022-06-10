@@ -1,5 +1,6 @@
 #include <string>
+#include <vector>
 #ifndef LOAD_HPP
 #define LOAD_HPP
-std::string load(std::string filename);
+std::vector<char> load(std::string filename);
 #endif
