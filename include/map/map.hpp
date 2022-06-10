@@ -1,4 +1,6 @@
 #include <vector>
+#ifndef MAP_HPP
+#define MAP_HPP
 
 struct Dimensions {
     int lines;
@@ -15,3 +17,4 @@ class Map {
         std::vector<std::vector<bool>> get_area(void);
         void set_area(std::vector<std::vector<bool>>);
 };
+#endif

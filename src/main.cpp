@@ -9,11 +9,31 @@
 #include <iostream>
 #include <string>
 #include <time.h>
+#include <ncurses.h>
 #include <all_helpers.hpp>
+#include <map.hpp>
 
 int
 main (int argc, char **argv)
 {
     // Seed the random number generator. Needed for randomly spawning jewel
     srand(time(NULL));
+    initscr();
+    clear();
+    noecho();
+    refresh();
+    curs_set(0);
+    keypad(stdscr, TRUE);
+    //Gather maps from disk and ask user which one to load
+    std::vector<Map> map_list = gather_maps();
+//    while (1) {
+        mvaddstr((LINES/2) - 1,
+                 (COLS/2) - 29,
+                  "Babis Potteridis and the Search of the Magic Gem");
+        for (auto entry : map_list) {
+        }
+//    }
+    while(1){}
+    refresh();
+    endwin();
 }

@@ -12,17 +12,12 @@ load(std::string filename) {
     char byte = 0;
 
     std::fstream data(filename, std::fstream::in);
-    if (!data.is_open()) {
-        std::cout << "* Data load from file " << filename << " failed."
-                  << std::endl;
-    } else {
+    if (data.is_open()) {
         // Get every byte from the map file
         while (data.get(byte)) {
             loaded_data.push_back(byte);
         }
     }
-    std::cout << "* Data load from file " << filename << " completed!"
-              << std::endl;
     data.close();
     return loaded_data;
 }
