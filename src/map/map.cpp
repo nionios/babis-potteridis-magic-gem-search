@@ -4,12 +4,12 @@
 Map::Map
 (std::vector<std::vector<bool>> input_area, int input_lines, int input_columns) {
     area = input_area;
-    // Temporary dimentions struct initialization
-    Dimentions input_dimentions;
-    input_dimentions.lines   = input_lines;
-    input_dimentions.columns = input_columns;
-    // Setting dimentions of map obj
-    dimentions = input_dimentions;
+    // Temporary dimensions struct initialization
+    Dimensions input_dimensions;
+    input_dimensions.lines   = input_lines;
+    input_dimensions.columns = input_columns;
+    // Setting dimensions of map obj
+    dimensions = input_dimensions;
 }
 
 std::vector<std::vector<bool>> Map::get_area(void) {
