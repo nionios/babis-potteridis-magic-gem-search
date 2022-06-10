@@ -1,5 +1,6 @@
 make:
 	g++ -lncurses\
+ ./src/intro/intro.cpp\
  ./src/map/map.cpp\
  ./src/main.cpp\
  ./src/entities/gem.cpp\
@@ -13,6 +14,7 @@ make:
  ./src/files/save/save.cpp\
  ./src/files/interpret/interpret.cpp\
  ./src/exceptions/exceptions.cpp\
+ -I./include/intro/\
  -I./include/map/\
  -I./include/entities/\
  -I./include/base_classes/\

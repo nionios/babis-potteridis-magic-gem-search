@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include <all_helpers.hpp>
 #include <map.hpp>
+#include <intro.hpp>
 
 int
 main (int argc, char **argv)
@@ -20,20 +21,17 @@ main (int argc, char **argv)
     srand(time(NULL));
     initscr();
     clear();
+    cbreak();
     noecho();
-    refresh();
     curs_set(0);
     keypad(stdscr, TRUE);
     //Gather maps from disk and ask user which one to load
     std::vector<Map> map_list = gather_maps();
 //    while (1) {
-        mvaddstr((LINES/2) - 1,
-                 (COLS/2) - 29,
-                  "Babis Potteridis and the Search of the Magic Gem");
-        for (auto entry : map_list) {
-        }
+//      for (auto entry : map_list) {
+//      }
 //    }
+    intro();
     while(1){}
-    refresh();
     endwin();
 }

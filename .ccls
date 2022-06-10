@@ -1,6 +1,7 @@
 g++ -lncurses
 -I./include/base_classes
 -I./include/map
+-I./include/intro
 -I./include/entities
 -I./include/helpers
 -I./include/exceptions
