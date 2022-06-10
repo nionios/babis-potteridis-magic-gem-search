@@ -19,3 +19,11 @@ std::vector<std::vector<bool>> Map::get_area(void) {
 void Map::set_area(std::vector<std::vector<bool>> input_area) {
     area = input_area;
 }
+
+int Map::get_lines(void) {
+    return dimensions.lines;
+}
+
+int Map::get_columns(void) {
+    return dimensions.columns;
+}

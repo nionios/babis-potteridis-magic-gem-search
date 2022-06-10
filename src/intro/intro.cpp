@@ -13,7 +13,7 @@ void print(std::string str, int offset_x, int offset_y) {
 
 void intro (void) {
     int offset_x = -7;
-    int offset_y = -4;
+    int offset_y = -8;
     print("Babis Potteridis", offset_x, offset_y);
     offset_x = -3;
     offset_y++;
@@ -21,22 +21,37 @@ void intro (void) {
     offset_x = -11;
     offset_y++;
     print("Search of the Magic Gem", offset_x, offset_y);
-    offset_x = -3;
+    offset_x = -4;
     offset_y += 2;
-    print("*******", offset_x, offset_y);
+    attron(COLOR_PAIR(4));
+    print("_________", offset_x, offset_y);
     offset_x--;
     offset_y++;
-    print("*********", offset_x, offset_y);
+    print("/////|\\\\\\\\\\", offset_x, offset_y);
+    offset_y++;
+    print("\\\\\\\\\\|/////", offset_x, offset_y);
     offset_x++;
     offset_y++;
-    print("*******", offset_x, offset_y);
+    print("\\\\\\\\|////", offset_x, offset_y);
     offset_x++;
     offset_y++;
-    print("*****", offset_x, offset_y);
+    print("\\\\\\|///", offset_x, offset_y);
     offset_x++;
     offset_y++;
-    print("***", offset_x, offset_y);
+    print("\\\\|//", offset_x, offset_y);
     offset_x++;
     offset_y++;
-    print("*", offset_x, offset_y);
+    print("\\|/", offset_x, offset_y);
+    offset_x++;
+    offset_y++;
+    print("v", offset_x, offset_y);
+    offset_x = -14;
+    offset_y += 2;
+    // Back to default color pair
+    attron(COLOR_PAIR(1));
+    mvaddstr((LINES/2) + offset_y,
+             (COLS/2)  + offset_x,
+             "Press any key to continue...");
+    refresh();
+    getch();
 }

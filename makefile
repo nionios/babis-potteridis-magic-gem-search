@@ -2,6 +2,7 @@ make:
 	g++ -lncurses\
  ./src/intro/intro.cpp\
  ./src/map/map.cpp\
+ ./src/map/print_map.cpp\
  ./src/main.cpp\
  ./src/entities/gem.cpp\
  ./src/entities/malfoy.cpp\
@@ -28,4 +29,4 @@ run:
 	make
 	./bin/$(ONAME)
 
-ONAME=Potter_and_the_Search_for_the_Magic_Jewel
+ONAME=Potter_and_the_Search_for_the_Magic_Gem

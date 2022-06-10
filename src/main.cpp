@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include <all_helpers.hpp>
 #include <map.hpp>
+#include <print_map.hpp>
 #include <intro.hpp>
 
 int
@@ -24,6 +25,12 @@ main (int argc, char **argv)
     cbreak();
     noecho();
     curs_set(0);
+    start_color();
+    init_pair(1, COLOR_GREEN, COLOR_BLACK);
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    init_pair(3, COLOR_BLACK, COLOR_BLACK);
+    init_pair(4, COLOR_CYAN,  COLOR_BLACK);
+    attron(COLOR_PAIR(1));
     keypad(stdscr, TRUE);
     //Gather maps from disk and ask user which one to load
     std::vector<Map> map_list = gather_maps();
@@ -32,6 +39,9 @@ main (int argc, char **argv)
 //      }
 //    }
     intro();
-    while(1){}
+    clear();
+    print_map(map_list[0]);
+    clear();
+    getch();
     endwin();
 }
