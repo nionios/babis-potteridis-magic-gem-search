@@ -14,21 +14,30 @@ gather_maps
     DIR *target_dir;
 
     target_dir = opendir("maps");
-    if (target_dir == NULL) throw maps_dir_not_found();
+    if (target_dir == NULL) throw maps_dir_not_found("maps");
 
     // Make a vector to store all the map objects
     std::vector<Map> loaded_map_list;
     // Process each entry.
     while ((dirent_ptr = readdir(target_dir)) != NULL) {
-    //    printf ("[%s]\n", dirent_ptr->d_name);
         // Loading all files in directory
         std::string filename = dirent_ptr->d_name;
-        std::vector<char> loaded_data_block = load(filename);
-        try {
-            Map loaded_map(interpret(loaded_data_block, filename));
-            loaded_map_list.push_back(loaded_map);
-        } catch (invalid_map_data ex) {
-            std::cerr << ex.what() << std::endl;
+        // We need to create the whole file path to open the file
+        std::string filepath = "maps/" + filename;
+
+        if (filename != "." && filename != "..") {
+            try {
+                std::vector<char> loaded_data_block = load(filepath);
+                // Skip current/previous unix directories
+                try {
+                    Map loaded_map(interpret(loaded_data_block, filepath));
+                    loaded_map_list.push_back(loaded_map);
+                } catch (invalid_map_data ex) {
+                    std::cerr << ex.what() << std::endl;
+                }
+            } catch (maps_file_not_found ex) {
+                std::cerr << ex.what() << std::endl;
+            }
         }
     }
 

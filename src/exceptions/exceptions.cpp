@@ -2,7 +2,10 @@
 #include <exception>
 #include <string>
 std::string invalid_map_data::what(void) {
-    return "Exception: Invalid map data in " + error_file;
+    return "Exception: Invalid map data in " + error_file + ":" +
+           "\n Check line: " + std::to_string(error_line) +
+            ", column: "     + std::to_string(error_col)  +
+           "\n Unknown Symbol:" + error_symbol;
 }
 invalid_map_data::invalid_map_data
 (std::string filename, int line, int col, char symbol) {
@@ -14,6 +17,18 @@ invalid_map_data::invalid_map_data
     error_symbol = symbol;
 }
 
+maps_dir_not_found::maps_dir_not_found (std::string dirname) {
+    error_dir = dirname;
+}
 std::string maps_dir_not_found::what(void) {
-    return "Exception: Invalid subject data in subject_data.txt";
-};
+    return "Exception: Cannot find maps directory, directory '" +
+            error_dir + "' not found";
+}
+
+maps_file_not_found::maps_file_not_found (std::string filename) {
+    error_file = filename;
+}
+std::string maps_file_not_found::what(void) {
+    return "Exception: Cannot find maps file, file '" +
+            error_file + "' not found";
+}

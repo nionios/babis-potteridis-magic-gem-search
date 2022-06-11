@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include <all_helpers.hpp>
 #include <map.hpp>
+#include <exceptions.hpp>
 #include <print_map.hpp>
 #include <intro.hpp>
 
@@ -19,6 +20,7 @@ int
 main (int argc, char **argv)
 {
     // Seed the random number generator. Needed for randomly spawning jewel
+     /*
     srand(time(NULL));
     initscr();
     clear();
@@ -30,18 +32,27 @@ main (int argc, char **argv)
     init_pair(2, COLOR_BLACK, COLOR_GREEN);
     init_pair(3, COLOR_BLACK, COLOR_BLACK);
     init_pair(4, COLOR_CYAN,  COLOR_BLACK);
+    init_pair(5, COLOR_WHITE, COLOR_BLACK);
     attron(COLOR_PAIR(1));
     keypad(stdscr, TRUE);
     //Gather maps from disk and ask user which one to load
-    std::vector<Map> map_list = gather_maps();
 //    while (1) {
 //      for (auto entry : map_list) {
 //      }
 //    }
-    intro();
+   // intro();
     clear();
-    print_map(map_list[0]);
+    /*/
+    try {
+        std::vector<Map> map_list = gather_maps();
+        //print_map(map_list[0]);
+        std::cout << map_list[0].get_area()[map_list[0].get_lines()][map_list[0].get_columns()] << std::endl;
+    } catch (maps_dir_not_found ex) {
+        std::cerr << ex.what() << std::endl;
+    }
+    /*
     clear();
     getch();
     endwin();
+    */
 }

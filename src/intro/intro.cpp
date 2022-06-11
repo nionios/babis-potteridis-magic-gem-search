@@ -14,13 +14,19 @@ void print(std::string str, int offset_x, int offset_y) {
 void intro (void) {
     int offset_x = -7;
     int offset_y = -8;
+    attron(COLOR_PAIR(5));
     print("Babis Potteridis", offset_x, offset_y);
+    attron(COLOR_PAIR(1));
     offset_x = -3;
     offset_y++;
     print("and the", offset_x ,offset_y);
     offset_x = -11;
     offset_y++;
-    print("Search of the Magic Gem", offset_x, offset_y);
+    print("Search of the", offset_x, offset_y);
+    attron(COLOR_PAIR(5));
+    offset_x = 2;
+    print(" Magic Gem", offset_x, offset_y);
+    attron(COLOR_PAIR(1));
     offset_x = -4;
     offset_y += 2;
     attron(COLOR_PAIR(4));
