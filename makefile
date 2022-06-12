@@ -3,6 +3,7 @@ make:
  ./src/intro/intro.cpp\
  ./src/map/map.cpp\
  ./src/map/print_map.cpp\
+ ./src/map/print_map_menu.cpp\
  ./src/main.cpp\
  ./src/entities/gem.cpp\
  ./src/entities/malfoy.cpp\

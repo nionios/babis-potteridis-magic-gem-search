@@ -12,8 +12,9 @@
 #include <ncurses.h>
 #include <all_helpers.hpp>
 #include <map.hpp>
-#include <exceptions.hpp>
 #include <print_map.hpp>
+#include <print_map_menu.hpp>
+#include <exceptions.hpp>
 #include <intro.hpp>
 
 int
@@ -35,15 +36,14 @@ main (int argc, char **argv)
     attron(COLOR_PAIR(1));
     keypad(stdscr, TRUE);
     //Gather maps from disk and ask user which one to load
-//    while (1) {
-//      for (auto entry : map_list) {
-//      }
-//    }
-   // intro();
+    intro();
     clear();
     try {
         std::vector<Map> map_list = gather_maps();
-        print_map(map_list[1]);
+        print_map_menu(map_list);
+        int choice = getch() - '0';
+        clear();
+        print_map(map_list[choice]);
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
     }

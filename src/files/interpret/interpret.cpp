@@ -1,9 +1,10 @@
 #include <iostream>
+#include <regex>
 #include <string>
 #include <map.hpp>
 #include <exceptions.hpp>
 // This function does not only decode the data, it interprets it into objects
-// too. File path is given only for the case of the exception.
+// too.
 Map
 interpret
 (std::vector<char> input_data_block,
@@ -24,21 +25,15 @@ interpret
         switch (symbol) {
             case '*':
                 interpreted_area[line].push_back(true);
-                //DEBUG
-                std::cout << interpreted_area[line][col];
                 col++;
                 break;
             case '.':
                 interpreted_area[line].push_back(false);
-                //DEBUG
-                std::cout << interpreted_area[line][col];
                 col++;
                 break;
             // Change line to make 2D area and reset column number
             case '\n':
                 {//Limit scope in this case
-                    //DEBUG
-                    std::cout << std::endl;
                     line++;
                     //Initialize vector for making the next row
                     std::vector<bool> next_row;
@@ -52,8 +47,17 @@ interpret
                 break;
         }
     }
+    std::string interpreted_name = std::regex_replace(filepath,
+                                         std::regex("maps/"),
+                                         "");
+    interpreted_name = std::regex_replace(interpreted_name,
+                                         std::regex("_"),
+                                         " ");
+    interpreted_name = std::regex_replace(interpreted_name,
+                                         std::regex("\\.txt"),
+                                         " ");
     // Construct map object with interpreted data (give_total col since col is
     // reset)
-    Map interpreted_map(interpreted_area, line, total_col);
+    Map interpreted_map(interpreted_area, line, total_col, interpreted_name);
     return interpreted_map;
 }
