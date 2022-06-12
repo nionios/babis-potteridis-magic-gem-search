@@ -20,7 +20,6 @@ int
 main (int argc, char **argv)
 {
     // Seed the random number generator. Needed for randomly spawning jewel
-     /*
     srand(time(NULL));
     initscr();
     clear();
@@ -42,17 +41,12 @@ main (int argc, char **argv)
 //    }
    // intro();
     clear();
-    /*/
     try {
         std::vector<Map> map_list = gather_maps();
-        //print_map(map_list[0]);
-        std::cout << map_list[0].get_area()[map_list[0].get_lines()][map_list[0].get_columns()] << std::endl;
+        print_map(map_list[0]);
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
     }
-    /*
-    clear();
     getch();
     endwin();
-    */
 }
