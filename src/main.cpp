@@ -43,7 +43,7 @@ main (int argc, char **argv)
     clear();
     try {
         std::vector<Map> map_list = gather_maps();
-        print_map(map_list[0]);
+        print_map(map_list[1]);
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
     }
