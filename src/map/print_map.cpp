@@ -7,6 +7,9 @@ void print_map (Map input_map) {
     std::vector<std::vector<bool>> input_area = input_map.get_area();
     int map_lines = input_map.get_lines();
     int map_cols  = input_map.get_columns();
+    mvaddstr(2,
+             (COLS/2)  - input_map.get_name().size()/2,
+             input_map.get_name().c_str());
     for (int i=0; i<map_lines; i++) {
         for (int j=0; j<map_cols; j++) {
             if (input_area[i][j]) attron(COLOR_PAIR(2));

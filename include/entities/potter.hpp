@@ -1,7 +1,7 @@
 #include <movable.hpp>
 class Potter : Movable {
     private:
-        char identifier = 'M';
+        char identifier = 'P';
     public:
 
 };

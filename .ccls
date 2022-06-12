@@ -4,6 +4,7 @@ g++ -lncurses
 -I./include/intro
 -I./include/entities
 -I./include/helpers
+-I./include/mechanics
 -I./include/exceptions
 -I./include/files/save
 -I./include/files/encode

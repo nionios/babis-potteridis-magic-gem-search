@@ -1,3 +1,5 @@
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
 class Entity {
     private:
         int x;
@@ -10,3 +12,4 @@ class Entity {
         int get_y(void);
         void teleport(int input_x, int input_y);
 };
+#endif

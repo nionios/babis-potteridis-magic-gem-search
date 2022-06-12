@@ -1,9 +1,12 @@
 #include <entity.hpp>
 #include <map.hpp>
-class Gem : Entity {
+#ifndef GEM_HPP
+#define GEM_HPP
+class Gem : public Entity {
     private:
     public:
-        void spawn_elsewhere(Dimensions map_dimensions);
-        int generate_spawn_elsewhere_turn(Dimensions map_dimensions);
+        Gem(int x = 0, int y = 0) : Entity(x,y) {}
+        void spawn_elsewhere(Map map);
+        int generate_spawn_elsewhere_turn(Map map);
 };
-
+#endif

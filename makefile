@@ -12,10 +12,12 @@ make:
  ./src/base_classes/movable.cpp\
  ./src/helpers/vector_printer.cpp\
  ./src/helpers/gather.cpp\
+ ./src/helpers/init_pairs.cpp\
+ ./src/helpers/setup_ncurses.cpp\
  ./src/files/load/load.cpp\
- ./src/files/save/save.cpp\
  ./src/files/interpret/interpret.cpp\
  ./src/exceptions/exceptions.cpp\
+ ./src/mechanics/place_gem.cpp\
  -I./include/intro/\
  -I./include/map/\
  -I./include/entities/\
@@ -24,6 +26,7 @@ make:
  -I./include/files/load/\
  -I./include/files/interpret/\
  -I./include/exceptions/\
+ -I./include/mechanics/\
  -o $(ONAME)
 	mv $(ONAME) ./bin/
 run:
