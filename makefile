@@ -12,7 +12,6 @@ make:
  ./src/entities/malfoy.cpp\
  ./src/entities/potter.cpp\
  ./src/base_classes/entity.cpp\
- ./src/base_classes/movable.cpp\
  ./src/helpers/vector_printer.cpp\
  ./src/helpers/gather.cpp\
  ./src/helpers/init_pairs.cpp\

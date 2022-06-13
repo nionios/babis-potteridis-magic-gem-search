@@ -33,8 +33,8 @@ void Malfoy::move(Map map, Potter potter) {
     // is enclosed by a 1-block wall at least
     if (map.get_area()[y-1][x] == 0)  {
         // Calculate value
-        up_value = std::abs(std::sqrt(std::pow(target_x - x, 2) +
-                                      std::pow(target_y - y - 1, 2)));
+        up_value = std::abs(std::sqrt(std::pow(x - target_x, 2) +
+                                      std::pow(y - target_y + 1, 2)));
         // Correlate value with its direction
         std::pair<int,char> candidate = {up_value, 'u'};
         // Push the candidate on the candidate list
@@ -42,22 +42,22 @@ void Malfoy::move(Map map, Potter potter) {
     }
     // Follow same method with the other directions if they are available
     if (map.get_area()[y+1][x] == 0) {
-        down_value = std::abs(std::sqrt(std::pow(target_x - x, 2) +
-                                        std::pow(target_y - y + 1, 2)));
+        down_value = std::abs(std::sqrt(std::pow(x - target_x, 2) +
+                                        std::pow(y - target_y - 1, 2)));
         std::pair<int,char> candidate = {down_value, 'd'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x-1] == 0) {
-        left_value = std::abs(std::sqrt(std::pow(target_x - x - 1, 2) +
-                                        std::pow(target_y - y, 2)));
+        left_value = std::abs(std::sqrt(std::pow(x - target_x + 1, 2) +
+                                        std::pow(y - target_y, 2)));
         std::pair<int,char> candidate = {left_value, 'l'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x+1] == 0) {
-        right_value = std::abs(std::sqrt(std::pow(target_x - x + 1, 2) +
-                                         std::pow(target_y - y, 2)));
+        right_value = std::abs(std::sqrt(std::pow(x - target_x - 1, 2) +
+                                         std::pow(y - target_y, 2)));
         std::pair<int,char> candidate = {right_value, 'r'};
         candidate_list.push_back(candidate);
     }
@@ -82,7 +82,7 @@ void Malfoy::move(Map map, Potter potter) {
     }
     // Erase malfoy from the map
     erase(*this, map);
-    // Now time to learn which canditate has won and the move to make base on
+    // Now time to learn which canditate has won and the move to make based on
     // this.
     // Change position of malfoy to the updated one
     switch (best_candidate.second) {

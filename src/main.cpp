@@ -49,23 +49,19 @@ main (int argc, char **argv)
         print_map(*curr_map);
         // Spawn all entities
         Gem gem;
-        gem.spawn(*curr_map);
         Malfoy malfoy;
-        malfoy.spawn(*curr_map);
         Potter potter;
+        gem.spawn   (*curr_map);
+        malfoy.spawn(*curr_map);
         potter.spawn(*curr_map);
         // Place all entities on the map
-        place(gem,*curr_map);
+        place(gem,   *curr_map);
         place(malfoy,*curr_map);
         place(potter,*curr_map);
         // Start playing the game
         int turn = 0;
         // Generate the turn in which the gem respawns
         int gem_spawn_turn = gem.generate_spawn_turn(*curr_map);
-        // DEBUG
-        mvaddstr(0,0,std::to_string(gem_spawn_turn).c_str());
-        refresh();
-        //
         while (1) {
             if (potter.get_x() == malfoy.get_x() &&
                 potter.get_y() == malfoy.get_y()) {
@@ -96,12 +92,7 @@ main (int argc, char **argv)
             refresh();
             // Increment turn by 1
             turn++;
-
-            // DEBUG
-            mvaddstr(0,COLS-10,std::to_string(turn).c_str());
-            //
         }
-        refresh();
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
     } catch (exit_signal ex) {/*Do nothing, just exit normally*/}

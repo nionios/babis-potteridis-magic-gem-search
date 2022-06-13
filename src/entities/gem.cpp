@@ -14,9 +14,11 @@ int Gem::generate_spawn_turn (Map map) {
     int limit;
     int turn_number;
     while (1) {
-        limit = map.get_columns() * map.get_lines();
+        limit = (map.get_columns() * map.get_lines()) / 2;
         turn_number = rand() % limit;
-        if (turn_number > (limit/4) && turn_number < (limit/1.5)) break;
+        // Absolute max is 60 in all maps (even big ones)
+        if (turn_number > (limit/4)   &&
+            turn_number < (limit/1.5)) break;
     }
     return turn_number;
 }

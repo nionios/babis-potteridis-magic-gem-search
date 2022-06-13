@@ -16,7 +16,7 @@ void loss (void) {
     slow_print("caught Babis!", offset_x ,offset_y);
     offset_x = -4;
     offset_y++;
-    attron(COLOR_PAIR(8));
+    attron(COLOR_PAIR(10));
     slow_print("You lost!", offset_x, offset_y);
     // Back to default color pair
     attron(COLOR_PAIR(1));

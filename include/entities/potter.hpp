@@ -1,11 +1,11 @@
-#include <movable.hpp>
+#include <entity.hpp>
 #ifndef POTTER_HPP
 #define POTTER_HPP
-// Use parent class constructor (parent of parent constructor, Entity)
-class Potter : public Movable {
+// Use parent class constructor
+class Potter : public Entity {
     public:
-        // Use constructor of class Movable (That is using the Entity constuctor)
-        Potter(int x = 0, int y = 0, char id = 'M') : Movable(x,y,id) {}
+        // Use constructor of parent class
+        Potter(int x = 0, int y = 0, char id = 'M') : Entity(x,y,id) {}
         void move(Map map);
 };
 #endif
