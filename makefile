@@ -18,6 +18,7 @@ make:
  ./src/files/interpret/interpret.cpp\
  ./src/exceptions/exceptions.cpp\
  ./src/mechanics/place.cpp\
+ ./src/mechanics/erase.cpp\
  -I./include/intro/\
  -I./include/map/\
  -I./include/entities/\

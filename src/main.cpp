@@ -21,6 +21,7 @@
 #include <intro.hpp>
 #include <gem.hpp>
 #include <place.hpp>
+#include <erase.hpp>
 
 int
 main (int argc, char **argv)
@@ -41,19 +42,56 @@ main (int argc, char **argv)
         while (choice < 0 || choice > map_list.size() - 1) {
            choice = getch() - '0';
         }
+        Map * curr_map = &map_list[choice];
         clear();
-        print_map(map_list[choice]);
+        print_map(*curr_map);
         // Spawn all entities
         Gem gem;
-        gem.spawn(map_list[choice]);
+        gem.spawn(*curr_map);
         Malfoy malfoy;
-        malfoy.spawn(map_list[choice]);
+        malfoy.spawn(*curr_map);
         Potter potter;
-        potter.spawn(map_list[choice]);
+        potter.spawn(*curr_map);
         // Place all entities on the map
-        place(gem,map_list[choice]);
-        place(malfoy,map_list[choice]);
-        place(potter,map_list[choice]);
+        place(gem,*curr_map);
+        place(malfoy,*curr_map);
+        place(potter,*curr_map);
+        // Start playing the game
+        int turn = 0;
+        // Generate the turn in which the gem respawns
+        int gem_spawn_turn = gem.generate_spawn_turn(*curr_map);
+        while (1) {
+            if (potter.get_x() == malfoy.get_x() &&
+                potter.get_y() == malfoy.get_y()) {
+                clear();
+                //lose();
+                break;
+            } else if (potter.get_x() == gem.get_x() &&
+                       potter.get_y() == gem.get_y()) {
+                clear();
+                //win();
+                break;
+            }
+            // Respawn and replace the gem if the appropriate turn has come
+            if (turn == gem_spawn_turn) {
+                // Erase the gem in its current position
+                erase(gem, *curr_map);
+                gem.spawn(*curr_map);
+                // Make turn zero to recount
+                turn = 0;
+                // Generate the next turn to spawn
+                gem_spawn_turn = gem.generate_spawn_turn(*curr_map);
+                // Replace the gem
+                place(gem,*curr_map);
+                refresh();
+            }
+//            potter.move();
+            refresh();
+ //           malfoy.move();
+            refresh();
+            // Increment turn by 1
+            turn++;
+        }
         refresh();
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
