@@ -66,15 +66,19 @@ main (int argc, char **argv)
             if (potter.get_x() == malfoy.get_x() &&
                 potter.get_y() == malfoy.get_y()) {
                 clear();
-                loss();
+                loss(true);
+                break;
+            } else if (gem.get_x() == malfoy.get_x() &&
+                       gem.get_y() == malfoy.get_y()) {
+                clear();
+                loss(false);
                 break;
             } else if (potter.get_x() == gem.get_x() &&
                        potter.get_y() == gem.get_y()) {
                 clear();
                 win();
                 break;
-            }
-            // Respawn and replace the gem if the appropriate turn has come
+            }             // Respawn and replace the gem if the appropriate turn has come
             if (turn == gem_spawn_turn) {
                 // Erase the gem in its current position
                 erase(gem,*curr_map);
@@ -88,7 +92,7 @@ main (int argc, char **argv)
                 refresh();
             }
             potter.move(*curr_map);
-            malfoy.move(*curr_map,potter);
+            malfoy.move(*curr_map, potter, gem);
             refresh();
             // Increment turn by 1
             turn++;

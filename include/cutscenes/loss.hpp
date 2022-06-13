@@ -1,1 +1,1 @@
-void loss (void);
+void loss (bool mode);

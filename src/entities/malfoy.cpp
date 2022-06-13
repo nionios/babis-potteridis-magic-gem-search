@@ -3,27 +3,28 @@
  * License: GPLv3
  * Description: Function to move Malfoy around on the map. He follows potter
  *              calculating where to go based on where the straight line to
- *              potters coordinates is closer. This is info is stored into
- *              "candidate" pairs, first value is distance from potter, second
- *              is direction that needs to be followed to get this distance
- *              from potter.
+ *              potter or gem coordinates is closer.
+ *              Malfoy chases Potter and the gem.
  */
 #include <cmath>
 #include <ncurses.h>
+#include <gem.hpp>
 #include <map.hpp>
 #include <potter.hpp>
 #include <erase.hpp>
 #include <place.hpp>
-void Malfoy::move(Map map, Potter potter) {
-    // Straight line is y2 – y1*x2  – x1  when malfoy(x1,x2) and potter(x2,y2)
+
+std::vector<std::pair<int,char>> Malfoy::create_candidates
+(Map map, Entity target) {
+    // Straight line is y2 – y1*x2  – x1  when malfoy(x1,x2) and target(x2,y2)
     // Malfoy's coordinates
     int x = this->get_x();
     int y = this->get_y();
     // Potter's coordinates
-    int target_x = potter.get_x();
-    int target_y = potter.get_y();
+    int target_x = target.get_x();
+    int target_y = target.get_y();
     // Check which possible movements around malfoy are available and set
-    // straight-line-to-potter values
+    // straight-line-to-target values
     int up_value;
     int down_value;
     int left_value;
@@ -61,11 +62,31 @@ void Malfoy::move(Map map, Potter potter) {
         std::pair<int,char> candidate = {right_value, 'r'};
         candidate_list.push_back(candidate);
     }
+
+    return candidate_list;
+}
+
+void Malfoy::move(Map map, Potter potter, Gem gem) {
+    std::vector<std::pair<int,char>> candidate_list_to_gem =
+        create_candidates(map, gem);
+    std::vector<std::pair<int,char>> candidate_list_to_potter =
+        create_candidates(map, potter);
+    std::vector<std::pair<int,char>> total_candidate_list;
+    // Allocate memory for the joined vector (candidate list)
+    total_candidate_list.reserve(candidate_list_to_gem.size() +
+                                 candidate_list_to_potter.size() );
+    // Insert the contents of the two candidate list into this one, thus join
+    total_candidate_list.insert(total_candidate_list.end(),
+                                candidate_list_to_gem.begin(),
+                                candidate_list_to_gem.end() );
+    total_candidate_list.insert(total_candidate_list.end(),
+                                candidate_list_to_potter.begin(),
+                                candidate_list_to_potter.end() );
     // Time to decide which candidate is better
     std::pair <int,char> best_candidate;
     // First iteration flag
     bool first = true;
-    for (auto & current_candidate : candidate_list) {
+    for (auto & current_candidate : total_candidate_list) {
         if (first) {
             // Make flag false after first iteration
             first = false;
@@ -85,6 +106,8 @@ void Malfoy::move(Map map, Potter potter) {
     // Now time to learn which canditate has won and the move to make based on
     // this.
     // Change position of malfoy to the updated one
+    int x = this->get_x();
+    int y = this->get_y();
     switch (best_candidate.second) {
         case 'u':
             this->teleport(x,y-1);

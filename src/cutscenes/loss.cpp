@@ -1,19 +1,25 @@
 /* Code by Dennis Nikolopoulos
  * AM: 18390126
  * License: GPLv3
- * Description: Losing sequence
+ * Description: Losing sequence. If mode is true, then Babis got caught by
+ *              Lucas. Else, Lucas got the gem.
  */
 #include <ncurses.h>
 #include <slow_print.hpp>
 #include <loss.hpp>
 
-void loss (void) {
+void loss (bool mode) {
     int offset_x = -6;
     int offset_y = -8;
-    slow_print("Lukas Malfoy", offset_x, offset_y);
-    offset_x = -7;
+    slow_print("Lucas Malfoy", offset_x, offset_y);
     offset_y++;
-    slow_print("caught Babis!", offset_x ,offset_y);
+    if (mode) {
+        offset_x = -7;
+        slow_print("caught Babis!", offset_x ,offset_y);
+    } else {
+        offset_x = -6;
+        slow_print("got the Gem!", offset_x ,offset_y);
+    }
     offset_x = -4;
     offset_y++;
     attron(COLOR_PAIR(10));
