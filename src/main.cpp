@@ -103,7 +103,6 @@ main (int argc, char **argv)
         refresh();
     } catch (maps_dir_not_found ex) {
         std::cerr << ex.what() << std::endl;
-    }
-    getch();
+    } catch (exit_signal ex) {/*Do nothing, just exit normally*/}
     endwin();
 }

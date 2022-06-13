@@ -8,6 +8,7 @@
  *              is direction that needs to be followed to get this distance
  *              from potter.
  */
+#include <cmath>
 #include <ncurses.h>
 #include <map.hpp>
 #include <potter.hpp>
@@ -32,7 +33,7 @@ void Malfoy::move(Map map, Potter potter) {
     // is enclosed by a 1-block wall at least
     if (map.get_area()[y-1][x] == 0)  {
         // Calculate value
-        up_value = target_y - (y-1)*target_x - x;
+        up_value = std::abs(target_y - (y-1)*target_x - x);
         // Correlate value with its direction
         std::pair<int,char> candidate = {up_value, 'u'};
         // Push the candidate on the candidate list
@@ -40,19 +41,19 @@ void Malfoy::move(Map map, Potter potter) {
     }
     // Follow same method with the other directions if they are available
     if (map.get_area()[y+1][x] == 0) {
-        down_value = target_y - (y+1)*target_x - x;
+        down_value = std::abs(target_y - (y+1)*target_x - x);
         std::pair<int,char> candidate = {down_value, 'd'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x-1] == 0) {
-        left_value = target_y - y*target_x - x - 1;
+        left_value = std::abs(target_y - y*target_x - x - 1);
         std::pair<int,char> candidate = {left_value, 'l'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x+1] == 0) {
-        right_value = target_y - y*target_x - x + 1;
+        right_value = std::abs(target_y - y*target_x - x + 1);
         std::pair<int,char> candidate = {right_value, 'r'};
         candidate_list.push_back(candidate);
     }

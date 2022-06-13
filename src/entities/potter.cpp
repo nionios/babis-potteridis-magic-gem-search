@@ -10,6 +10,7 @@
 #include <potter.hpp>
 #include <erase.hpp>
 #include <place.hpp>
+#include <exceptions.hpp>
 
 // If the map position that the player wants to move too is empty (map area
 // is 0) return true, else false (for ex a wall exists there)
@@ -28,30 +29,38 @@ void Potter::move(Map map) {
         switch (getch()) {
             case KEY_UP:
             case 'w':
+            case 'k':
                 valid_dir_given = true;
                 next_x = this->get_x();
                 next_y = this->get_y()-1;
                 break;
             case KEY_DOWN:
             case 's':
+            case 'j':
                 valid_dir_given = true;
                 next_x = this->get_x();
                 next_y = this->get_y()+1;
                 break;
             case KEY_RIGHT:
             case 'd':
+            case 'l':
                 valid_dir_given = true;
                 next_x = this->get_x()+1;
                 next_y = this->get_y();
                 break;
             case KEY_LEFT:
             case 'a':
+            case 'h':
                 valid_dir_given = true;
                 next_x = this->get_x()-1;
                 next_y = this->get_y();
                 break;
+            case 'q':
+                throw exit_signal();
+                break;
             default:
-                mvaddstr(LINES,COLS-18,"Tip: Use wasd or arrow keys to move.");
+                mvaddstr(LINES-1,(COLS/2)-22,
+                        "Tip: Use wasd or hjkl or arrow keys to move.");
                 refresh();
                 break;
         }

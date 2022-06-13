@@ -37,4 +37,6 @@ class maps_file_not_found : std::exception {
         maps_file_not_found(std::string filename);
         std::string what(void);
 };
+
+class exit_signal : std::exception {};
 #endif
