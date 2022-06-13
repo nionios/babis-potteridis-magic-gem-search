@@ -1,6 +1,9 @@
 make:
 	g++ -lncurses\
- ./src/intro/intro.cpp\
+ ./src/cutscenes/slow_print.cpp\
+ ./src/cutscenes/intro.cpp\
+ ./src/cutscenes/win.cpp\
+ ./src/cutscenes/loss.cpp\
  ./src/map/map.cpp\
  ./src/map/print_map.cpp\
  ./src/map/print_map_menu.cpp\
@@ -19,7 +22,7 @@ make:
  ./src/exceptions/exceptions.cpp\
  ./src/mechanics/place.cpp\
  ./src/mechanics/erase.cpp\
- -I./include/intro/\
+ -I./include/cutscenes/\
  -I./include/map/\
  -I./include/entities/\
  -I./include/base_classes/\

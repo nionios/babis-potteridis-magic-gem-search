@@ -19,6 +19,8 @@
 #include <print_map_menu.hpp>
 #include <exceptions.hpp>
 #include <intro.hpp>
+#include <win.hpp>
+#include <loss.hpp>
 #include <gem.hpp>
 #include <place.hpp>
 #include <erase.hpp>
@@ -68,12 +70,12 @@ main (int argc, char **argv)
             if (potter.get_x() == malfoy.get_x() &&
                 potter.get_y() == malfoy.get_y()) {
                 clear();
-                //lose();
+                loss();
                 break;
             } else if (potter.get_x() == gem.get_x() &&
                        potter.get_y() == gem.get_y()) {
                 clear();
-                //win();
+                win();
                 break;
             }
             // Respawn and replace the gem if the appropriate turn has come
