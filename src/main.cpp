@@ -60,6 +60,10 @@ main (int argc, char **argv)
         int turn = 0;
         // Generate the turn in which the gem respawns
         int gem_spawn_turn = gem.generate_spawn_turn(*curr_map);
+        // DEBUG
+        mvaddstr(0,0,std::to_string(gem_spawn_turn).c_str());
+        refresh();
+        //
         while (1) {
             if (potter.get_x() == malfoy.get_x() &&
                 potter.get_y() == malfoy.get_y()) {
@@ -75,22 +79,26 @@ main (int argc, char **argv)
             // Respawn and replace the gem if the appropriate turn has come
             if (turn == gem_spawn_turn) {
                 // Erase the gem in its current position
-                erase(gem, *curr_map);
+                erase(gem,*curr_map);
                 gem.spawn(*curr_map);
-                // Make turn zero to recount
+                // Place the gem in its new position
+                place(gem,*curr_map);
+                // Reset turn counter
                 turn = 0;
                 // Generate the next turn to spawn
                 gem_spawn_turn = gem.generate_spawn_turn(*curr_map);
-                // Replace the gem
-                place(gem,*curr_map);
                 refresh();
             }
-//            potter.move();
+            potter.move(*curr_map);
             refresh();
- //           malfoy.move();
-            refresh();
+//            malfoy.move();
+//            refresh();
             // Increment turn by 1
             turn++;
+
+            // DEBUG
+            mvaddstr(0,COLS-10,std::to_string(turn).c_str());
+            //
         }
         refresh();
     } catch (maps_dir_not_found ex) {
