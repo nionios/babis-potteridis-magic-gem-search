@@ -1,3 +1,8 @@
+/* Code by Dennis Nikolopoulos
+ * AM: 18390126
+ * License: GPLv3
+ * Description: Simple function to print the map list for the user to choose map
+ */
 #include <ncurses.h>
 #include <map.hpp>
 void print_map_menu(std::vector<Map> map_list) {

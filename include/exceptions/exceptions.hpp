@@ -13,6 +13,15 @@ class invalid_map_data : std::exception {
         std::string what(void);
 };
 
+class invalid_entity_data : std::exception {
+    private:
+        char error_symbol;
+    public:
+        invalid_entity_data(char symbol);
+        std::string what(void);
+};
+
+
 class maps_dir_not_found : std::exception {
     private:
         std::string error_dir;

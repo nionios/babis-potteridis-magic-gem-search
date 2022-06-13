@@ -17,7 +17,7 @@ make:
  ./src/files/load/load.cpp\
  ./src/files/interpret/interpret.cpp\
  ./src/exceptions/exceptions.cpp\
- ./src/mechanics/place_gem.cpp\
+ ./src/mechanics/place.cpp\
  -I./include/intro/\
  -I./include/map/\
  -I./include/entities/\

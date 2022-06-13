@@ -1,7 +1,12 @@
+/* Code by Dennis Nikolopoulos
+ * AM: 18390126
+ * License: GPLv3
+ * Description: Intro sequence for starting the game
+ */
 #include <ncurses.h>
 #include <unistd.h>
 #include <string>
-// Intro sequence for starting the game
+
 void print(std::string str, int offset_x, int offset_y) {
     for (auto character : str) {
         mvaddch((LINES/2) + offset_y, (COLS/2) + offset_x, character);

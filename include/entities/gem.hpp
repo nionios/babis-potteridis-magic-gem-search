@@ -2,11 +2,11 @@
 #include <map.hpp>
 #ifndef GEM_HPP
 #define GEM_HPP
+// Use parent class constructor
 class Gem : public Entity {
-    private:
     public:
-        Gem(int x = 0, int y = 0) : Entity(x,y) {}
-        void spawn_elsewhere(Map map);
-        int generate_spawn_elsewhere_turn(Map map);
+        // Use constructor of class entity
+        Gem(int x = 0, int y = 0, char id = '$') : Entity(x,y,id) {}
+        int generate_spawn_turn(Map map);
 };
 #endif

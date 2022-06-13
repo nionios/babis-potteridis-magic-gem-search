@@ -1,3 +1,9 @@
+/* Code by Dennis Nikolopoulos
+ * AM: 18390126
+ * License: GPLv3
+ * Description: Function to print the map but also center it (print in the 
+ *              middle of the terminal.
+ */
 #include <vector>
 #include <ncurses.h>
 #include <map.hpp>

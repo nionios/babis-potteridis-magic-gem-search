@@ -1,3 +1,8 @@
+/* Code by Dennis Nikolopoulos
+ * AM: 18390126
+ * License: GPLv3
+ * Description: Necessary getters, setters and constructors for the Map object
+ */
 #include <vector>
 #include <string>
 #include <map.hpp>

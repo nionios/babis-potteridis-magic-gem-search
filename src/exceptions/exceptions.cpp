@@ -17,6 +17,17 @@ invalid_map_data::invalid_map_data
     error_symbol = symbol;
 }
 
+std::string invalid_entity_data::what(void) {
+    return "Exception: Invalid entity data: \n Unknown Symbol: '"
+            + std::to_string(error_symbol) +
+           "', Initialization of an entity object has probably failed";
+}
+invalid_entity_data::invalid_entity_data
+(char symbol) {
+    // Mention the symbol that has is unknown to the program
+    error_symbol = symbol;
+}
+
 maps_dir_not_found::maps_dir_not_found (std::string dirname) {
     error_dir = dirname;
 }
