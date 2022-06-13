@@ -91,8 +91,8 @@ main (int argc, char **argv)
             }
             potter.move(*curr_map);
             refresh();
-//            malfoy.move();
-//            refresh();
+            malfoy.move(*curr_map,potter);
+            refresh();
             // Increment turn by 1
             turn++;
 
