@@ -14,7 +14,7 @@
 #include <erase.hpp>
 #include <place.hpp>
 
-std::vector<std::pair<int,char>> Malfoy::create_candidates
+std::vector<std::pair<double,char>> Malfoy::create_candidates
 (Map map, Entity target) {
     // Straight line is y2 – y1*x2  – x1  when malfoy(x1,x2) and target(x2,y2)
     // Malfoy's coordinates
@@ -24,12 +24,12 @@ std::vector<std::pair<int,char>> Malfoy::create_candidates
     int target_x = target.get_x();
     int target_y = target.get_y();
     // Check which possible movements around malfoy are available and set
-    // straight-line-to-target values
-    int up_value;
-    int down_value;
-    int left_value;
-    int right_value;
-    std::vector<std::pair<int,char>> candidate_list;
+    // straight-line-to-target values (in double for more accuracy)
+    double up_value;
+    double down_value;
+    double left_value;
+    double right_value;
+    std::vector<std::pair<double,char>> candidate_list;
     // These checks cannot access out-of-bound memory since edge of the maps
     // is enclosed by a 1-block wall at least
     if (map.get_area()[y-1][x] == 0)  {
@@ -37,7 +37,7 @@ std::vector<std::pair<int,char>> Malfoy::create_candidates
         up_value = std::abs(std::sqrt(std::pow(x - target_x, 2) +
                                       std::pow(y - target_y + 1, 2)));
         // Correlate value with its direction
-        std::pair<int,char> candidate = {up_value, 'u'};
+        std::pair<double,char> candidate = {up_value, 'u'};
         // Push the candidate on the candidate list
         candidate_list.push_back(candidate);
     }
@@ -45,21 +45,21 @@ std::vector<std::pair<int,char>> Malfoy::create_candidates
     if (map.get_area()[y+1][x] == 0) {
         down_value = std::abs(std::sqrt(std::pow(x - target_x, 2) +
                                         std::pow(y - target_y - 1, 2)));
-        std::pair<int,char> candidate = {down_value, 'd'};
+        std::pair<double,char> candidate = {down_value, 'd'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x-1] == 0) {
         left_value = std::abs(std::sqrt(std::pow(x - target_x + 1, 2) +
                                         std::pow(y - target_y, 2)));
-        std::pair<int,char> candidate = {left_value, 'l'};
+        std::pair<double,char> candidate = {left_value, 'l'};
         candidate_list.push_back(candidate);
     }
 
     if (map.get_area()[y][x+1] == 0) {
         right_value = std::abs(std::sqrt(std::pow(x - target_x - 1, 2) +
                                          std::pow(y - target_y, 2)));
-        std::pair<int,char> candidate = {right_value, 'r'};
+        std::pair<double,char> candidate = {right_value, 'r'};
         candidate_list.push_back(candidate);
     }
 
@@ -67,11 +67,11 @@ std::vector<std::pair<int,char>> Malfoy::create_candidates
 }
 
 void Malfoy::move(Map map, Potter potter, Gem gem) {
-    std::vector<std::pair<int,char>> candidate_list_to_gem =
+    std::vector<std::pair<double,char>> candidate_list_to_gem =
         create_candidates(map, gem);
-    std::vector<std::pair<int,char>> candidate_list_to_potter =
+    std::vector<std::pair<double,char>> candidate_list_to_potter =
         create_candidates(map, potter);
-    std::vector<std::pair<int,char>> total_candidate_list;
+    std::vector<std::pair<double,char>> total_candidate_list;
     // Allocate memory for the joined vector (candidate list)
     total_candidate_list.reserve(candidate_list_to_gem.size() +
                                  candidate_list_to_potter.size() );
@@ -83,7 +83,7 @@ void Malfoy::move(Map map, Potter potter, Gem gem) {
                                 candidate_list_to_potter.begin(),
                                 candidate_list_to_potter.end() );
     // Time to decide which candidate is better
-    std::pair <int,char> best_candidate;
+    std::pair <double,char> best_candidate;
     // First iteration flag
     bool first = true;
     for (auto & current_candidate : total_candidate_list) {

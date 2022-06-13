@@ -6,7 +6,7 @@
 // Use parent class constructor
 class Malfoy : public Entity {
     private:
-        std::vector<std::pair<int,char>> create_candidates
+        std::vector<std::pair<double,char>> create_candidates
             (Map map, Entity target);
     public:
         // Use constructor of parent class

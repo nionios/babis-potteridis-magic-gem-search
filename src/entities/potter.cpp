@@ -55,12 +55,17 @@ void Potter::move(Map map) {
                 next_x = this->get_x()-1;
                 next_y = this->get_y();
                 break;
+            case ' ':
+                valid_dir_given = true;
+                next_x = this->get_x();
+                next_y = this->get_y();
+                break;
             case 'q':
                 throw exit_signal();
                 break;
             default:
-                mvaddstr(LINES-1,(COLS/2)-22,
-                        "Tip: Use wasd or hjkl or arrow keys to move.");
+                mvaddstr(LINES-1,(COLS/2)-40,
+                        "Tip: Use wasd or hjkl or arrow keys to move. Space to remain still and q to exit");
                 refresh();
                 break;
         }
